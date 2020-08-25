@@ -1,0 +1,9 @@
+[tag_ansible_role_tower]
+10.112.6.7
+
+[tag_ansible_role_netbox]
+10.112.6.77
+
+[ec2]
+10.112.6.7
+10.112.6.77

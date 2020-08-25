@@ -1,0 +1,36 @@
+---
+- name: Deploy access switch base configuration
+  hosts: nexus_access
+  connection: network_cli
+
+  tasks:
+    - name: Enable Kovarus KPSC required features
+      nxos_feature:
+        state: enabled
+        feature: "{{ item }}"
+      loop: "{{ nxos_features }}"
+
+    - nxos_ntp:
+        server: "{{ item }}"
+      loop: "{{ network_ntp }}"
+
+    - name: Deploy VLANs to Access layer 
+      nxos_vlan:
+        vlan_id: "{{ item.vlan_id }}"
+        name: "{{ item.vlan_name }}"
+        admin_state: up
+      loop: "{{ provisioned_vlans }}"
+
+    - name: Configure VPC with delay restore and existing keepalive VRF
+      nxos_vpc:
+        domain: "{{ item.vpc_domain }}"
+        role_priority: "{{ item.role_priority }}"
+        delay_restore: "{{ item.delay_restore }}"
+        peer_gw: "{{ item.peer_gw }}"
+        pkl_src: "{{ item.pkl_source }}"
+        pkl_dest: "{{ item.pkl_destination }}"
+        pkl_vrf: "{{ item.pkl_vrf }}"
+        auto_recovery: "{{ item.auto_recovery }}"
+      loop: "{{ vpc_parameters }}"
+
+

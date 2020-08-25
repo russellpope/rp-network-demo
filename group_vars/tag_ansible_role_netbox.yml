@@ -1,0 +1,54 @@
+---
+# Netbox Variables
+netbox_packages:
+  - gcc
+  - postgresql10-devel
+  - libxml2-devel
+  - libxslt-devel
+  - libffi-devel
+  - libjpeg-devel
+  - graphviz
+  - openssl-devel
+netbox_stable: true
+netbox_stable_version: 2.4.3
+netbox_database_socket: "{{ postgresql_unix_socket_directories[0] }}"
+netbox_superuser_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  66323535356161633236326538363162326630376166316536623866653339363231306234386138
+  6665343934386261633537666566623336376233363038360a663236626630383531336162383734
+  61623861653130306663313866396336653239663639336530313065653239643861376536623030
+  6631636534643865390a663837363530643637653335346465636134636332353565333366356465
+  39383566653461383434346364343061326239663230346230373538316634366563
+netbox_socket: "127.0.0.1:8080"
+netbox_config:
+  ALLOWED_HOSTS:
+    - localhost
+    - 127.0.0.1
+    - "{{ ansible_default_ipv4['address'] }}"
+    - "{{ ansible_fqdn }}"
+    - netbox.kovarus.com
+  MEDIA_ROOT: "{{ netbox_shared_path }}/media"
+  REPORTS_ROOT: "{{ netbox_shared_path }}/reports"
+
+# PostgreSQL Variables
+postgresql_version: "10"
+postgresql_packages:
+  - postgresql10
+  - postgresql10-server
+  - postgresql10-contrib
+  - postgresql10-libs
+postgresql_bin_path: /usr/pgsql-10/bin
+postgresql_data_dir: /var/lib/pgsql/10/data
+postgresql_config_path: "{{ postgresql_data_dir }}"
+postgresql_daemon: postgresql-10
+postgresql_users:
+  - name: netbox
+    role_attr_flags: CREATEDB,NOSUPERUSER
+
+# NGINX Variables
+main_push_enable: true
+main_push_location: roles_files/netbox_nginx/nginx.conf
+unit_enable: true
+nginx_port: 443
+nginx_server_kpsc: "{{ ansible_fqdn }}"
+nginx_server_kovarus: netbox.kovarus.com

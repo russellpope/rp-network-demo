@@ -1,0 +1,64 @@
+---
+# test
+- name: Deploy core switch functionality
+  hosts: core
+  connection: network_cli
+
+  tasks:
+    - name: Enable Kovarus KPSC required features
+      nxos_feature:
+        state: enabled
+        feature: "{{ item }}"
+      loop: "{{ nxos_features }}"
+
+    - nxos_ntp:
+        server: "{{ item }}"
+      loop: "{{ network_ntp }}"
+
+    - name: Enable OSPF 
+      nxos_ospf:
+        ospf: "{{ ospf_process_id }}"
+        state: present
+
+    - name: Deploy VLANs to core
+      nxos_vlan:
+        vlan_id: "{{ item.vlan_id }}"
+        name: "{{ item.vlan_name }}"
+        admin_state: up
+      loop: "{{ provisioned_vlans }}"
+
+    - name: Create an SVI for provisioned vlans
+      nxos_interface:
+        interface: "{{ item.interface_name }}"
+        admin_state: up
+      loop: "{{ vlan_layer3 }}"
+
+    - name: Ensure ipv4 address is configured on all loopbacks
+      nxos_l3_interface:
+        aggregate: 
+          - { name: "{{ item.interface_name }}", ipv4: "{{ item.layer3 }}/{{ item.mask }}" }
+        state: present  
+      loop: "{{ loopback_interfaces }}"
+    
+    - name: Ensure ipv4 address is configured on all SVI interfaces
+      nxos_l3_interface:
+        aggregate: 
+          - { name: "{{ item.interface_name }}", ipv4: "{{ item.layer3 }}/{{ item.mask }}" }
+        state: present  
+      loop: "{{ vlan_layer3 }}"
+
+    - name: Ensure HSRP is configured with following params on a SVI
+      nxos_hsrp:
+        group: "{{ item.hsrp_group }}"
+        vip: "{{ item.hsrp_vip }}"
+        priority: "{{ hsrp_priority }}"
+        interface: "{{ item.interface_name }}"
+        preempt: "{{ item.hsrp_preempt }}"
+      loop: "{{ vlan_layer3 }}"
+
+    - name: Configure OSPF on all SVIs
+      nxos_interface_ospf:
+        interface: "{{ item.interface_name }}"
+        ospf: "{{ ospf_process_id }}"
+        area: "{{ item.ospf_area }}"
+      loop: "{{ vlan_layer3 }}"

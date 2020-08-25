@@ -1,0 +1,15 @@
+# from galaxy
+- src: geerlingguy.postgresql
+  version: 1.4.3
+- src: nginxinc.nginx
+  version: 0.7.0
+
+# from github
+# Update this to the following:
+# - src: https://github.com/lae/ansible-role-netbox
+#   version: 479b0db3cef325589a6ca6695564cea4d1265402
+#   name: lae.netbox
+# When the merge request is accepted
+- src: https://github.com/as0bu/ansible-role-netbox
+  version: ddbbdb8c89702ab9a03823e3cc3e9cc580cabbd2
+  name: lae.netbox

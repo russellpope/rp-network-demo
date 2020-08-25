@@ -1,0 +1,10 @@
+---
+- hosts: tag_ansible_role_netbox
+  become: yes
+  tasks:
+  - Name: Testing Variable Lookup netbox_packages
+    debug:
+      var: netbox_packages
+  - Name: Testing Variable Lookup postgresql_package
+    debug:
+      var: postgresql_packages

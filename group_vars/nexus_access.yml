@@ -1,0 +1,258 @@
+---
+
+ansible_network_os: nxos
+username: admin
+
+nxos_features:
+  - lacp
+  - vpc
+  - lldp
+  - nxapi
+
+provisioned_vlans:
+  - vlan_id: 10
+    vlan_name: inf-svcs-vlan10
+  - vlan_id: 12
+    vlan_name: inf-svcs-vlan12
+  - vlan_id: 14
+    vlan_name: vcp-npivot-ext
+  - vlan_id: 16
+    vlan_name: vcd-kovarus2-ext
+  - vlan_id: 18
+    vlan_name: inf-vmo-vlan_id18
+  - vlan_id: 19
+    vlan_name: inf-nfs-vlan19
+  - vlan_id: 20
+    vlan_name: inf-iscsi-vlan20
+  - vlan_id: 22
+    vlan_name: vcac-demo-vlan22
+  - vlan_id: 24
+    vlan_name: inf-iscsi1p1-vlan24
+  - vlan_id: 25
+    vlan_name: inf-iscsi1p2-vlan25
+  - vlan_id: 26
+    vlan_name: inf-iscsi2p1-vlan26
+  - vlan_id: 27
+    vlan_name: inf-iscsi2p2-vlan27
+  - vlan_id: 30
+    vlan_name: cld-demo-vlan30
+  - vlan_id: 32
+    vlan_name: cld-demo-vlan32
+  - vlan_id: 50
+    vlan_name: inf-anieto1siteA-vlan50
+  - vlan_id: 51
+    vlan_name: inf-anieto2siteB-vlan51
+  - vlan_id: 74
+    vlan_name: inf-vblock-vlan74
+  - vlan_id: 75
+    vlan_name: inf-vblock-vlan75
+  - vlan_id: 76
+    vlan_name: inf-vblock-vlan76
+  - vlan_id: 77
+    vlan_name: inf-nfs-vlan77
+  - vlan_id: 78
+    vlan_name: inf-kvdemo-vlan78
+  - vlan_id: 80
+    vlan_name: NETWORK-LAB
+  - vlan_id: 101
+    vlan_name: inf-vsan101-vlan101
+  - vlan_id: 110
+    vlan_name: inf-vxlan-transport
+  - vlan_id: 120
+    vlan_name: inf-vsan-vlan120
+  - vlan_id: 200
+    vlan_name: svc-vxlan-vlan200
+  - vlan_id: 202
+    vlan_name: test
+  - vlan_id: 300
+    vlan_name: inf-vdi-vlan300
+  - vlan_id: 301
+    vlan_name: inf-vdi-vlan301
+  - vlan_id: 302
+    vlan_name: inf-svcs-vlan302
+  - vlan_id: 361
+    vlan_name: ospftest
+  - vlan_id: 400
+    vlan_name: inf-svcs-vlan400
+  - vlan_id: 406
+    vlan_name: inf-svcs-vlan406
+  - vlan_id: 450
+    vlan_name: sk-svcs-vlan450
+  - vlan_id: 451
+    vlan_name: sk-svcs-vlan451
+  - vlan_id: 452
+    vlan_name: sk-svcs-vlan452
+  - vlan_id: 453
+    vlan_name: sk-svcs-vlan453
+  - vlan_id: 454
+    vlan_name: sk-svcs-vlan454
+  - vlan_id: 455
+    vlan_name: kp-svcs-vlan455
+  - vlan_id: 460
+    vlan_name: jarauzo-vlan_id460
+  - vlan_id: 461
+    vlan_name: jarauzo-vlan_id461
+  - vlan_id: 462
+    vlan_name: sia-a-mgmt-vlan462
+  - vlan_id: 463
+    vlan_name: sia-a-vmotion-vlan463
+  - vlan_id: 464
+    vlan_name: sia-a-rp4vm-iscsi-a-vlan464
+  - vlan_id: 465
+    vlan_name: sia-a-rp4vm-iscsi-b-vlan465
+  - vlan_id: 466
+    vlan_name: sia-a-actifio-iscsi-a-vlan466
+  - vlan_id: 467
+    vlan_name: sia-a-actifio-iscsi-b-vlan467
+  - vlan_id: 468
+    vlan_name: sia-a-compute-vlan468
+  - vlan_id: 469
+    vlan_name: sia-a-gigavue-vlan469
+  - vlan_id: 470
+    vlan_name: sia-b-mgmt-vlan470
+  - vlan_id: 471
+    vlan_name: sia-b-vmotion-vlan471
+  - vlan_id: 472
+    vlan_name: sia-b-rp4vm-iscsi-a-vlan472
+  - vlan_id: 473
+    vlan_name: sia-b-rp4vm-iscsi-b-vlan473
+  - vlan_id: 474
+    vlan_name: sia-b-actifio-iscsi-a-vlan474
+  - vlan_id: 475
+    vlan_name: sia-b-actifio-iscsi-b-vlan475
+  - vlan_id: 476
+    vlan_name: sia-b-compute-vlan476
+  - vlan_id: 477
+    vlan_name: sia-b-gigavue-vlan477
+  - vlan_id: 501
+    vlan_name: vlan501
+  - vlan_id: 502
+    vlan_name: vlan502
+  - vlan_id: 503
+    vlan_name: vlan503
+  - vlan_id: 504
+    vlan_name: vlan504
+  - vlan_id: 505
+    vlan_name: vlan505
+  - vlan_id: 506
+    vlan_name: vlan506
+  - vlan_id: 507
+    vlan_name: vlan507
+  - vlan_id: 508
+    vlan_name: vlan508
+  - vlan_id: 509
+    vlan_name: vlan509
+  - vlan_id: 510
+    vlan_name: vlan510
+  - vlan_id: 600
+    vlan_name: inf-ucs-vlan600
+  - vlan_id: 601
+    vlan_name: inf-ucs-vlan601
+  - vlan_id: 602
+    vlan_name: inf-ucs-vlan602
+  - vlan_id: 603
+    vlan_name: inf-ucs-vlan603
+  - vlan_id: 604
+    vlan_name: inf-ucs-vlan604
+  - vlan_id: 605
+    vlan_name: inf-ucs-vlan605
+  - vlan_id: 606
+    vlan_name: inf-ucs-vlan606
+  - vlan_id: 607
+    vlan_name: inf-ucs-vlan607
+  - vlan_id: 608
+    vlan_name: inf-ucs-vlan608
+  - vlan_id: 609
+    vlan_name: inf-ucs-vlan609
+  - vlan_id: 610
+    vlan_name: inf-ucs-vlan610
+  - vlan_id: 620
+    vlan_name: inf-ucs-vlan620
+  - vlan_id: 621
+    vlan_name: inf-ucs-vlan621
+  - vlan_id: 622
+    vlan_name: inf-ucs-vlan622
+  - vlan_id: 623
+    vlan_name: inf-ucs-vlan623
+  - vlan_id: 624
+    vlan_name: inf-ucs-vlan624
+  - vlan_id: 625
+    vlan_name: inf-ucs-vlan625
+  - vlan_id: 626
+    vlan_name: inf-ucs-vlan626
+  - vlan_id: 627
+    vlan_name: inf-ucs-vlan627
+  - vlan_id: 628
+    vlan_name: inf-ucs-vlan628
+  - vlan_id: 629
+    vlan_name: inf-ucs-vlan629
+  - vlan_id: 701
+    vlan_name: rp-vlan701
+  - vlan_id: 702
+    vlan_name: rp-vlan702
+  - vlan_id: 703
+    vlan_name: rp-vlan703
+  - vlan_id: 704
+    vlan_name: rp-vlan704
+  - vlan_id: 705
+    vlan_name: rp-vlan705
+  - vlan_id: 706
+    vlan_name: rp-vlan706
+  - vlan_id: 707
+    vlan_name: rp-vlan707
+  - vlan_id: 708
+    vlan_name: rp-vlan708
+  - vlan_id: 709
+    vlan_name: rp-vlan709
+  - vlan_id: 710
+    vlan_name: rp-vlan710
+  - vlan_id: 1064
+    vlan_name: openshift-vlan1064
+  - vlan_id: 1065
+    vlan_name: openshift-vlan1065
+  - vlan_id: 1066
+    vlan_name: openshift-vlan1066
+  - vlan_id: 1067
+    vlan_name: openshift-vlan1067
+  - vlan_id: 1068
+    vlan_name: openshift-vlan1068
+  - vlan_id: 1069
+    vlan_name: openshift-vlan1069
+  - vlan_id: 1070
+    vlan_name: openshift-vlan1070
+  - vlan_id: 1071
+    vlan_name: openshift-vlan1071
+  - vlan_id: 1072
+    vlan_name: openshift-vlan1072
+  - vlan_id: 1073
+    vlan_name: openshift-vlan1073
+  - vlan_id: 1074
+    vlan_name: openshift-vlan1074
+  - vlan_id: 1075
+    vlan_name: openshift-vlan1075
+  - vlan_id: 1076
+    vlan_name: openshift-vlan1076
+  - vlan_id: 1077
+    vlan_name: openshift-vlan1077
+  - vlan_id: 1078
+    vlan_name: openshift-vlan1078
+  - vlan_id: 1079
+    vlan_name: openshift-vlan1079
+  - vlan_id: 1080
+    vlan_name: openshift-vlan1080
+  - vlan_id: 1081
+    vlan_name: openshift-vlan1081
+  - vlan_id: 1082
+    vlan_name: openshift-vlan1082
+  - vlan_id: 1083
+    vlan_name: openshift-vlan1083
+  - vlan_id: 1084
+    vlan_name: openshift-vlan1084
+  - vlan_id: 1234
+    vlan_name: api-test-vlan1234
+  - vlan_id: 1235
+    vlan_name: api-test-vlan1235
+  - vlan_id: 2000
+    vlan_name: ospf-test
+
+

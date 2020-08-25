@@ -1,0 +1,31 @@
+server {
+    listen       {{ nginx_port }} ssl;
+    server_name  {{ nginx_server_kpsc }};
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+    ssl_certificate /etc/nginx/ssl/{{ nginx_server_kpsc }}_cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/{{ nginx_server_kpsc }}_key.pem;
+}
+
+server {
+    listen       {{ nginx_port }} ssl;
+    server_name  {{ nginx_server_kovarus }};
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+    ssl_certificate /etc/nginx/ssl/{{ nginx_server_kovarus }}_cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/{{ nginx_server_kovarus }}_key.pem;
+}

@@ -1,0 +1,12 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: AWS_Available_Subnets
+    name: AWS_Available_Subnets
+    inherits: 
+    description: 
+  fields:
+  - execute:
+      value: AWS_Available_Subnets
