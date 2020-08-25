@@ -7,4 +7,5 @@
 10.64.4.113
 
 [network_common]
-
+[core]
+[access]
