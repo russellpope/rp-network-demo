@@ -1,0 +1,13 @@
+---
+hostname: hq-accr2-sw2.kpsc.io
+
+
+vpc_parameters:
+  - vpc_domain: 50
+    role_priority: 1000
+    delay_restore: 180  
+    pkl_source: 10.32.0.102
+    pkl_destination: 10.32.0.101
+    pkl_vrf: management
+    peer_gw: true
+    auto_recovery: true

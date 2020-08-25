@@ -1,0 +1,58 @@
+---
+hostname: hq-sw1.kpsc.io
+hsrp_id: 2
+hsrp_priority: 110
+loopback0_ip: 10.0.0.1
+
+ospf_process_id: 1
+ospf_router_id: 10.0.0.1
+ospf_area: 0.0.0.0
+default_info_orig: true
+
+
+loopback_interfaces:
+  - interface_name: loopback0
+    layer3: "{{ loopback0_ip }}"
+    mask: 32
+    ospf_process: 1
+    ospf_area: 0.0.0.0
+    ospf_mtu_ignore: True
+    admin_state: up
+    description: "Router ID/Loopback"
+    ip_redirects: False
+
+vlan_layer3:
+  - interface_name: vlan10
+    layer3: "10.1.0.{{ hsrp_id }}"
+    mask: 23
+    hsrp_group: 10
+    hsrp_version: 2
+    hsrp_vip: 10.1.0.1
+    hsrp_priority: "{{ hsrp_priority }}"
+    hsrp_hello_timer: 1
+    hsrp_dead_timer: 3 
+    hsrp_preempt: enabled
+    hsrp_bfd: True
+    ospf_process: 1
+    ospf_area: 0.0.0.0
+    ospf_mtu_ignore: True
+    admin_state: up
+    description: "Layer 3 interface for admin VLAN 10"
+    ip_redirects: False
+  - interface_name: vlan12
+    layer3: "10.2.0.{{ hsrp_id }}"
+    mask: 23
+    hsrp_group: 12
+    hsrp_version: 2
+    hsrp_vip: 10.2.0.1
+    hsrp_priority: "{{ hsrp_priority }}"
+    hsrp_hello_timer: 1
+    hsrp_dead_timer: 3 
+    hsrp_preempt: enabled
+    hsrp_bfd: True
+    ospf_process: 1
+    ospf_area: 0.0.0.0
+    ospf_mtu_ignore: True
+    admin_state: up
+    description: "Layer 3 interface for admin VLAN 12"
+    ip_redirects: False
