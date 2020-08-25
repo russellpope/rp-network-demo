@@ -1,11 +1,19 @@
 [core]
-10.64.4.110
-10.64.4.111
+10.64.4.110 ansible_user=admin ansible_password=cisco
+10.64.4.111 ansible_user=admin ansible_password=cisco
 
 [access]
-10.64.4.112
-10.64.4.113
+10.64.4.112 ansible_user=admin ansible_password=cisco
+10.64.4.113 ansible_user=admin ansible_password=cisco
 
-[network_common]
-[core]
-[access]
+[routers]
+10.64.4.100 ansible_user=admin ansible_password=!Passw0rd ansible_network_os=ios ansible_connection=network_cli
+10.64.4.101 ansible_user=admin ansible_password=!Passw0rd ansible_network_os=ios ansible_connection=network_cli
+10.64.4.102 ansible_user=admin ansible_password=!Passw0rd ansible_network_os=ios ansible_connection=network_cli
+10.64.4.103 ansible_user=admin ansible_password=!Passw0rd ansible_network_os=ios ansible_connection=network_cli
+
+[network_common:children]
+core
+access
+routers
+
