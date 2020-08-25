@@ -1,6 +1,6 @@
 ---
 - name: Deploy access switch base configuration
-  hosts: nexus_access
+  hosts: access
   connection: network_cli
 
   tasks:

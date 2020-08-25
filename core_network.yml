@@ -3,8 +3,11 @@
 - name: Deploy core switch functionality
   hosts: core
   connection: network_cli
-
+ 
   tasks:
+    - name: Gather facts
+      nxos_facts:
+
     - name: Enable Kovarus KPSC required features
       nxos_feature:
         state: enabled

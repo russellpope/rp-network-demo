@@ -8,7 +8,9 @@ ospf_process_id: 1
 ospf_router_id: 10.0.0.1
 ospf_area: 0.0.0.0
 default_info_orig: true
-
+nxos_provider:
+  username: "admin"
+  password: "cisco"
 
 loopback_interfaces:
   - interface_name: loopback0

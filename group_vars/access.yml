@@ -3,6 +3,10 @@
 ansible_network_os: nxos
 username: admin
 
+network_ntp:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+
 nxos_features:
   - lacp
   - vpc
