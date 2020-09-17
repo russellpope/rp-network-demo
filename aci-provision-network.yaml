@@ -1,0 +1,134 @@
+- name: Create (or delete) a tenant in ACI
+  hosts:  localhost
+  connection: local
+  gather_facts: no
+
+
+  vars:
+    description: "test"                              # tenant description
+    tenant: auto-test1                                       # tenant name
+    desired_state: present                                 # 'present' (to create) or 'absent' (to delete)
+    validate_certs: no                                     # certificate verify
+    password: bagofd0nuts!                       # specify the actual password as an extra var
+
+  tasks:
+    - name: Create (or delete) tenant
+      aci_tenant:
+        hostname: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        tenant: test-ansible-test-1111
+        description: '{{ description }}'
+        state: present
+ 
+    - name: Create a tenant
+      aci_tenant:
+        host: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        tenant: workflow-test
+        state: present
+      delegate_to: localhost
+
+    - name: Create a bridge domain
+      aci_bd:
+        host: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        tenant: workflow-test
+        bd: database
+        state: present
+      delegate_to: localhost
+
+    - name: Create a subnet
+      aci_bd_subnet:
+        host: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        tenant: workflow-test
+        bd: database
+        gateway: 10.1.1.1
+        mask: 24
+        state: present
+      delegate_to: localhost
+
+    - name: Create a subnet with options
+      aci_bd_subnet:
+        host: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        tenant: workflow-test
+        bd: database
+        subnet_name: sql
+        gateway: 10.1.2.1
+        mask: 23
+        description: SQL Servers
+        scope: public
+        route_profile_l3_out: corp
+        route_profile: corp_route_profile
+        state: present
+      delegate_to: localhost
+
+    - name: Update a subnets scope to private and shared
+      aci_bd_subnet:
+        host: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        tenant: workflow-test
+        bd: database
+        gateway: 10.1.1.1
+        mask: 24
+        scope: [private, shared]
+        state: present
+      delegate_to: localhost
+
+    # - name: Get all subnets
+    #   aci_bd_subnet:
+    #     host: apic
+    #     username: admin
+    #     password: SomeSecretPassword
+    #     state: query
+    #   delegate_to: localhost
+
+    # - name: Get all subnets of specific gateway in specified tenant
+    #   aci_bd_subnet:
+    #     host: apic
+    #     username: admin
+    #     password: SomeSecretPassword
+    #     tenant: production
+    #     gateway: 10.1.1.1
+    #     mask: 24
+    #     state: query
+    #   delegate_to: localhost
+    #   register: query_result
+
+    # - name: Get specific subnet
+    #   aci_bd_subnet:
+    #     host: apic
+    #     username: admin
+    #     password: SomeSecretPassword
+    #     tenant: production
+    #     bd: database
+    #     gateway: 10.1.1.1
+    #     mask: 24
+    #     state: query
+    #   delegate_to: localhost
+    #   register: query_result
+
+    # - name: Delete a subnet
+    #   aci_bd_subnet:
+    #     host: apic
+    #     username: admin
+    #     password: SomeSecretPassword
+    #     tenant: production
+    #     bd: database
+    #     gateway: 10.1.1.1
+    #     mask: 24
+    #     state: absent
+    #   delegate_to: localhost

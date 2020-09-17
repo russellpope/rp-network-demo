@@ -1,0 +1,22 @@
+- name: Create (or delete) a tenant in ACI
+  hosts:  localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Add a new EPG
+      aci_epg:
+        hostname: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        tenant: workflow-test
+        ap: myappprofile
+        epg: test_epg2
+        description: Web Intranet EPG
+        bd: database
+        preferred_group: yes
+        state: present
+      delegate_to: localhost
+
+ 

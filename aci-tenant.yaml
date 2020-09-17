@@ -1,0 +1,15 @@
+
+
+- name: Ensure tenant customer-xyz exists
+
+
+
+
+  aci_tenant:
+    host: aci
+    username: admin
+    password: bagofd0nuts!
+
+    tenant: customer-xyz
+    description: Customer XYZ
+    state: present
