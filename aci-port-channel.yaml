@@ -1,10 +1,21 @@
-- aci_interface_policy_port_channel:
-    host: '{{ inventory_hostname }}'
-    username: '{{ username }}'
-    password: '{{ password }}'
-    port_channel: '{{ port_channel }}'
-    description: '{{ description }}'
-    min_links: '{{ min_links }}'
-    max_links: '{{ max_links }}'
-    mode: '{{ mode }}'
-  delegate_to: localhost
+- name: Create (or delete) a tenant in ACI
+  hosts:  localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Add a new port-channel
+      aci_interface_policy_port_channel:
+        hostname: 10.64.4.13
+        username: admin
+        password: bagofd0nuts!
+        validate_certs: false
+        port_channel: test-po1
+        description: 'a happy test'
+        min_links: 1
+        max_links: 16
+        mode: active
+      delegate_to: localhost
+
+ 
+

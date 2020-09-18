@@ -3,32 +3,15 @@
   connection: local
   gather_facts: no
 
-
-  vars:
-    description: "test"                              # tenant description
-    tenant: auto-test1                                       # tenant name
-    desired_state: present                                 # 'present' (to create) or 'absent' (to delete)
-    validate_certs: no                                     # certificate verify
-    password: bagofd0nuts!                       # specify the actual password as an extra var
-
   tasks:
-    - name: Create (or delete) tenant
-      aci_tenant:
-        hostname: 10.64.4.13
-        username: admin
-        password: bagofd0nuts!
-        validate_certs: false
-        tenant: test-ansible-test-1111
-        description: '{{ description }}'
-        state: present
- 
+
     - name: Create a tenant
       aci_tenant:
         host: 10.64.4.13
         username: admin
         password: bagofd0nuts!
         validate_certs: false
-        tenant: workflow-test
+        tenant: STT-On-The-Fly
         state: present
       delegate_to: localhost
 
@@ -38,7 +21,7 @@
         username: admin
         password: bagofd0nuts!
         validate_certs: false
-        tenant: workflow-test
+        tenant: STT-On-The-Fly
         bd: database
         state: present
       delegate_to: localhost
@@ -49,7 +32,7 @@
         username: admin
         password: bagofd0nuts!
         validate_certs: false
-        tenant: workflow-test
+        tenant: STT-On-The-Fly
         bd: database
         gateway: 10.1.1.1
         mask: 24
@@ -62,7 +45,7 @@
         username: admin
         password: bagofd0nuts!
         validate_certs: false
-        tenant: workflow-test
+        tenant: STT-On-The-Fly
         bd: database
         subnet_name: sql
         gateway: 10.1.2.1
@@ -80,55 +63,10 @@
         username: admin
         password: bagofd0nuts!
         validate_certs: false
-        tenant: workflow-test
+        tenant: STT-On-The-Fly
         bd: database
         gateway: 10.1.1.1
         mask: 24
         scope: [private, shared]
         state: present
       delegate_to: localhost
-
-    # - name: Get all subnets
-    #   aci_bd_subnet:
-    #     host: apic
-    #     username: admin
-    #     password: SomeSecretPassword
-    #     state: query
-    #   delegate_to: localhost
-
-    # - name: Get all subnets of specific gateway in specified tenant
-    #   aci_bd_subnet:
-    #     host: apic
-    #     username: admin
-    #     password: SomeSecretPassword
-    #     tenant: production
-    #     gateway: 10.1.1.1
-    #     mask: 24
-    #     state: query
-    #   delegate_to: localhost
-    #   register: query_result
-
-    # - name: Get specific subnet
-    #   aci_bd_subnet:
-    #     host: apic
-    #     username: admin
-    #     password: SomeSecretPassword
-    #     tenant: production
-    #     bd: database
-    #     gateway: 10.1.1.1
-    #     mask: 24
-    #     state: query
-    #   delegate_to: localhost
-    #   register: query_result
-
-    # - name: Delete a subnet
-    #   aci_bd_subnet:
-    #     host: apic
-    #     username: admin
-    #     password: SomeSecretPassword
-    #     tenant: production
-    #     bd: database
-    #     gateway: 10.1.1.1
-    #     mask: 24
-    #     state: absent
-    #   delegate_to: localhost
